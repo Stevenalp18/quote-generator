@@ -1,1 +1,1 @@
-export const baseUrl = "https://dummyjson.com/quotes"
+export const baseUrl = "https://dummyjson.com/quotes";
