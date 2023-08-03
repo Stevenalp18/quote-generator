@@ -57,12 +57,12 @@ const QuoteCard = () => {
     if (apiCheck() === true) {
       setRandNum(Math.floor(Math.random() * quotesData.length));
     } else {
-      alert("api not yet loaded");
+      alert("API NOT YET LOADED, wait until API loads to render quotes");
     }
   };
 
   const handleSave = () => {
-    if (apiCheck()) {
+    if (apiCheck() === true) {
       const quote = quotesData[randNum].quote;
       const author = quotesData[randNum].author;
       const id = quotesData[randNum].id;
@@ -72,14 +72,18 @@ const QuoteCard = () => {
       ]);
       console.log(saveData);
     } else {
-      alert("can not save, not yet loaded");
+      alert("API NOT YET LOADED, Try saving when API loads...");
     }
   };
 
   const showSavedList = () => {
-    setModalOpen(!modalOpen);
-    modal.current.classList.toggle("hidden");
-    quoteBox.current.classList.toggle("hidden");
+    if (apiCheck() === true) {
+      setModalOpen(!modalOpen);
+      modal.current.classList.toggle("hidden");
+      quoteBox.current.classList.toggle("hidden");
+    } else {
+      alert("API NOT YET LOADED! Try list again once loaded...");
+    }
   };
 
   return (
@@ -101,7 +105,7 @@ const QuoteCard = () => {
           );
         })}
       </div>
-      <div className="text-2xl sm:text-3xl m-auto p-4 sm:px-6 flex justify-between">
+      <div className="text-xl sm:text-3xl m-auto py-4 sm:px-6 flex justify-between">
         <button
           className="hover:text-white active:text-slate-200"
           onClick={() => {
