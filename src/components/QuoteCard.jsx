@@ -8,6 +8,7 @@ const QuoteCard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const modal = useRef();
   const quoteBox = useRef();
+  const defaultSave = useRef();
 
   useEffect(() => {
     setTimeout(() => {
@@ -62,6 +63,9 @@ const QuoteCard = () => {
   };
 
   const handleSave = () => {
+    if (saveData.length === 0) {
+      defaultSave.current.classList.add("hidden");
+    }
     if (apiCheck() === true) {
       const quote = quotesData[randNum].quote;
       const author = quotesData[randNum].author;
@@ -94,6 +98,10 @@ const QuoteCard = () => {
         ref={modal}
         className="text-2xl flex flex-col gap-10 bg-slate-200 border-2 border-slate-300 p-6 sm:p-10 rounded-xl h-96 overflow-y-scroll scrollbar-hide text-black hidden"
       >
+        <div ref={defaultSave} className="text-4xl">
+          WOW, so empty...
+        </div>
+
         {saveData.map((item) => {
           return (
             <div>
