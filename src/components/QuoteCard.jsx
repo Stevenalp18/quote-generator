@@ -5,7 +5,6 @@ const QuoteCard = () => {
   const [quotesData, setQuotesData] = useState([]);
   const [randNum, setRandNum] = useState(0);
   const [saveData, setSaveData] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
   const modal = useRef();
   const quoteBox = useRef();
   const defaultSave = useRef();
@@ -82,7 +81,6 @@ const QuoteCard = () => {
 
   const showSavedList = () => {
     if (apiCheck() === true) {
-      setModalOpen(!modalOpen);
       modal.current.classList.toggle("hidden");
       quoteBox.current.classList.toggle("hidden");
     } else {
@@ -98,6 +96,16 @@ const QuoteCard = () => {
         ref={modal}
         className="text-2xl flex flex-col gap-10 bg-slate-200 border-2 border-slate-300 p-6 sm:p-10 rounded-xl h-96 overflow-y-scroll scrollbar-hide text-black hidden"
       >
+        <div className="absolute top-4 right-4 fa-sm sm:top-14 sm:right-14  md:fa-md lg:right-14 lg:top-14">
+          <button
+            onClick={() => {
+              modal.current.classList.toggle("hidden");
+              quoteBox.current.classList.toggle("hidden");
+            }}
+          >
+            <i className="fa-solid fa-x text-slate-400" />
+          </button>
+        </div>
         <div ref={defaultSave} className="text-4xl">
           WOW, so empty...
         </div>

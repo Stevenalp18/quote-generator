@@ -45,7 +45,7 @@ const SocialIcons = () => {
         <button
           ref={shareIcon}
           onClick={handleToggle}
-          className="sm:hidden rounded-3xl font-['Agdasima'] rounded-3xl text-white bg-blue-500/70 hover:bg-blue-400 active:bg-orange-500 hover:text-black"
+          className="sm:hidden rounded-3xl font-['Agdasima'] rounded-3xl text-white bg-blue-500/70 hover:bg-blue-400 active:bg-blue-600 hover:text-black"
         >
           <i className="fa-solid fa-lg fa-share-nodes py-6 px-4" />
         </button>
