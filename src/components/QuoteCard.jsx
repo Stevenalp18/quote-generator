@@ -105,7 +105,7 @@ const QuoteCard = () => {
         {saveData.map((item) => {
           return (
             <div>
-              <div>
+              <div key={item.id}>
                 <div>"{item.quote}"</div>
                 <div>- "{item.author}"</div>
               </div>
