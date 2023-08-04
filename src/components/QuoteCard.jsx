@@ -8,6 +8,7 @@ const QuoteCard = () => {
   const modal = useRef();
   const quoteBox = useRef();
   const defaultSave = useRef();
+  const quoteId = useRef();
 
   useEffect(() => {
     setTimeout(() => {
@@ -69,7 +70,7 @@ const QuoteCard = () => {
       const quote = quotesData[randNum].quote;
       const author = quotesData[randNum].author;
       const id = quotesData[randNum].id;
-      setSaveData((prevState) => [
+      setSave = setSaveData((prevState) => [
         ...prevState,
         { quote: quote, author: author, id: id },
       ]);
@@ -88,15 +89,20 @@ const QuoteCard = () => {
     }
   };
 
+  const handleRemove = (id) => {
+    const updatedList = saveData.filter((item) => item.id !== id);
+    setSaveData(updatedList);
+  };
+
   return (
-    <div className="w-4/5 lg:w-2/5 text-[1.5rem] gap-10 m-auto relative top-20 sm:p-10 md:text-3xl lg:text-4xl font-['Amatic_SC']">
+    <div className="w-11/12 lg:w-2/5 text-[1.5rem] gap-10 m-auto relative top-20 sm:p-10 md:text-3xl lg:text-4xl font-['Amatic_SC']">
       {renderItem()}
       {/* Below gets hidden by default but appears over renderItem */}
       <div
         ref={modal}
         className="text-2xl flex flex-col gap-10 bg-slate-200 border-2 border-slate-300 p-6 sm:p-10 rounded-xl h-96 overflow-y-scroll scrollbar-hide text-black hidden"
       >
-        <div className="absolute top-4 right-4 fa-sm sm:top-14 sm:right-14  md:fa-md lg:right-14 lg:top-14">
+        <div className="absolute top-4 right-4 fa-sm sm:top-14 sm:right-14 md:fa-md lg:right-14 lg:top-14">
           <button
             onClick={() => {
               modal.current.classList.toggle("hidden");
@@ -109,13 +115,23 @@ const QuoteCard = () => {
         <div ref={defaultSave} className="text-4xl">
           WOW, so empty...
         </div>
-
+        <div className="flex flex-row pr-3 md:gap-4"></div>
         {saveData.map((item) => {
           return (
-            <div>
-              <div key={item.id}>
+            <div ref={quoteId} key={item.id}>
+              <div>
                 <div>"{item.quote}"</div>
                 <div>- "{item.author}"</div>
+              </div>
+              <div className="">
+                <button
+                  onClick={() => {
+                    handleRemove(item.id);
+                  }}
+                  className="active:text-red-500"
+                >
+                  <i className="fa-solid fa-trash" />
+                </button>
               </div>
             </div>
           );
